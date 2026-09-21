@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+    <h1>Attendance Management</h1>
+
+    <form method="POST">
+        <label>Select Student:</label>
+        <select name="student_id" required>
+            {% for student in students %}
+            <option value="{{ student[0] }}">
+                {{ student[1] }} - {{ student[2] }}
+            </option>
+            {% endfor %}
+        </select>
+
+        <input type="number" name="total_classes" placeholder="Total Classes" required>
+        <input type="number" name="attended_classes" placeholder="Attended Classes" required>
+
+        <button type="submit">Add Attendance</button>
+    </form>
+
+    <h2>Attendance Records</h2>
+
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Roll Number</th>
+            <th>Total Classes</th>
+            <th>Attended Classes</th>
+            <th>Percentage</th>
+            <th>Category</th>
+        </tr>
+
+        {% for record in attendance %}
+        <tr>
+            <td>{{ record[0] }}</td>
+            <td>{{ record[1] }}</td>
+            <td>{{ record[2] }}</td>
+            <td>{{ record[3] }}</td>
+            <td>{{ record[4] }}</td>
+            <td>{{ "%.2f"|format(record[5]) }}%</td>
+            <td>{{ record[6] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="/">Back to Home</a>
+    </div>
+</body>
+</html>

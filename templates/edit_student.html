@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Student</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Student Details</h1>
+
+        <form method="POST">
+            <input type="text" name="name" value="{{ student[1] }}" required>
+            <input type="text" name="roll_number" value="{{ student[2] }}" required>
+            <select name="department" required>
+    <option value="CSE" {% if student[3] == "CSE" %}selected{% endif %}>CSE</option>
+    <option value="IT" {% if student[3] == "IT" %}selected{% endif %}>IT</option>
+    <option value="ECE" {% if student[3] == "ECE" %}selected{% endif %}>ECE</option>
+    <option value="EEE" {% if student[3] == "EEE" %}selected{% endif %}>EEE</option>
+    <option value="Civil" {% if student[3] == "Civil" %}selected{% endif %}>Civil</option>
+    <option value="AIDS" {% if student[3] == "AIDS" %}selected{% endif %}>AIDS</option>
+    <option value="AIML" {% if student[3] == "AIML" %}selected{% endif %}>AIML</option>
+</select>
+            <input type="text" name="year" value="{{ student[4] }}" required>
+            <input type="email" name="email" value="{{ student[5] }}" required>
+
+            <button type="submit">Update Student</button>
+        </form>
+
+        <a href="/students" class="back-link">Back to Students</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+    <h1>Student Management</h1>
+
+    <form method="POST">
+        <input type="text" name="name" placeholder="Student Name" required>
+        <input type="text" name="roll_number" placeholder="Roll Number" required>
+        <select name="department" required>
+    <option value="">Select Department</option>
+    <option value="CSE">CSE</option>
+    <option value="IT">IT</option>
+    <option value="ECE">ECE</option>
+    <option value="EEE">EEE</option>
+    <option value="Civil">Civil</option>
+    <option value="AIDS">AIDS</option>
+    <option value="AIML">AIML</option>
+</select>
+        <input type="text" name="year" placeholder="Year" required>
+        <input type="email" name="email" placeholder="Email" required>
+
+        <button type="submit">Add Student</button>
+    </form>
+
+    <h2>Student List</h2>
+
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Roll Number</th>
+            <th>Department</th>
+            <th>Year</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+
+        {% for student in students %}
+<tr>
+    <td>{{ loop.index }}</td>
+    <td>{{ student[1] }}</td>
+    <td>{{ student[2] }}</td>
+    <td>{{ student[3] }}</td>
+    <td>{{ student[4] }}</td>
+    <td>{{ student[5] }}</td>
+    <td>
+    <div class="action-buttons">
+        <a class="btn btn-edit" href="/edit_student/{{ student[0] }}">Edit</a>
+
+        <a class="btn btn-delete"
+           href="/delete_student/{{ student[0] }}"
+           onclick="return confirm('Are you sure you want to delete this student?');">
+            Delete
+        </a>
+    </div>
+</td>
+</tr>
+{% endfor %}
+    </table>
+
+    <br>
+    <a href="/">Back to Home</a>
+    </div>
+</body>
+</html>

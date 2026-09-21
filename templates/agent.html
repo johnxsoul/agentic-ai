@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Agent Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+    <h1>AI Agent Assistant</h1>
+
+    <form method="POST">
+        <input type="text" name="query" placeholder="Ask something..." required>
+        <button type="submit">Ask Agent</button>
+    </form>
+
+    <h2>Example Questions</h2>
+    <ul>
+        <li>show low attendance students</li>
+        <li>show average attendance students</li>
+        <li>show excellent attendance students</li>
+        <li>show placed students</li>
+        <li>show all achievements</li>
+    </ul>
+
+    {% if query %}
+        <h2>Your Query: {{ query }}</h2>
+    {% endif %}
+
+    {% if query %}
+    <h2>Agent Response</h2>
+
+    {% if response %}
+        <table border="1" cellpadding="10">
+            {% for row in response %}
+            <tr>
+                {% for item in row %}
+                <td>{{ item }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No matching records found.</p>
+    {% endif %}
+{% endif %}
+
+    <br>
+    <a href="/">Back to Home</a>
+    </div>
+</body>
+</html>
